@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L’EMPIRE NOVA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Press Start 2P', cursive; background: #0a0a0a; color: #00ff9f; }
+        .glitch { animation: glitch 0.8s infinite; }
+        @keyframes glitch { 0% { text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff; } 50% { text-shadow: -2px 0 #ff00ff, 2px 0 #00ffff; } }
+        .card { transition: all 0.3s; }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 0 25px #00ff9f; }
+    </style>
+</head>
+<body class="min-h-screen bg-black text-[#00ff9f]">
+
+    <div class="fixed left-0 top-0 h-full w-64 bg-zinc-950 border-r border-[#00ff9f]/30 p-4">
+        <div class="flex items-center gap-2 mb-8">
+            <span class="text-3xl">🌌</span>
+            <h1 class="text-2xl tracking-widest glitch">L’EMPIRE NOVA</h1>
+        </div>
+        <nav class="space-y-2">
+            <a href="#" class="block px-4 py-3 bg-[#00ff9f]/10 rounded border border-[#00ff9f]">🏠 Home</a>
+            <a href="#" class="block px-4 py-3 hover:bg-zinc-900 rounded">📢 Announcements</a>
+            <a href="#" class="block px-4 py-3 hover:bg-zinc-900 rounded">🔧 Tools</a>
+            <a href="#" class="block px-4 py-3 hover:bg-zinc-900 rounded">⭐ Ratings</a>
+            <a href="#" class="block px-4 py-3 hover:bg-zinc-900 rounded">⚠️ Error Reports</a>
+        </nav>
+    </div>
+
+    <div class="ml-64 p-8">
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-5xl font-bold glitch text-white">L’EMPIRE NOVA</h1>
+                <p class="text-sm text-[#00ff9f]/70">WE HELP • WE EDUCATE • WE DOMINATE</p>
+            </div>
+            <div class="flex gap-4">
+                <button onclick="joinDiscord()" class="bg-[#5865F2] px-6 py-3 rounded flex items-center gap-2">💬 Join Discord</button>
+                <button onclick="alert('Connexion Empire activée 🔥')" class="border border-[#00ff9f] hover:bg-[#00ff9f]/10 px-6 py-3 rounded">Login</button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-6 mb-8">
+            <div onclick="editStat(this)" class="bg-zinc-900 border border-[#00ff9f]/30 p-6 rounded card cursor-pointer">
+                <div class="text-5xl font-bold" id="total-tools">69</div>
+                <div class="text-sm text-[#00ff9f]/70">Total Tools</div>
+            </div>
+            <div onclick="editStat(this)" class="bg-zinc-900 border border-[#00ff9f]/30 p-6 rounded card cursor-pointer">
+                <div class="text-5xl font-bold" id="downloads">2486</div>
+                <div class="text-sm text-[#00ff9f]/70">Downloads</div>
+            </div>
+            <div onclick="editStat(this)" class="bg-zinc-900 border border-[#00ff9f]/30 p-6 rounded card cursor-pointer">
+                <div class="text-5xl font-bold" id="ratings">9.9</div>
+                <div class="text-sm text-[#00ff9f]/70">Ratings</div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-6">
+            <div class="bg-zinc-900 border border-[#00ff9f]/30 p-6 rounded">
+                <h2 class="flex items-center gap-2 text-lg mb-4"><span>🛡️</span> Trust & Safety</h2>
+                <ul class="space-y-3 text-sm">
+                    <li>✅ All tools moderated</li>
+                    <li>✅ Content monitored 24/7</li>
+                    <li>✅ Empire controlled</li>
+                </ul>
+            </div>
+
+            <div class="bg-zinc-900 border border-[#00ff9f]/30 p-6 rounded">
+                <div class="flex justify-between mb-4">
+                    <h2 class="text-lg">Latest Tools</h2>
+                    <button onclick="addNewTool()" class="text-xs border border-[#00ff9f] px-3 py-1 rounded hover:bg-[#00ff9f]/10">+ ADD TOOL</button>
+                </div>
+                <div id="tools-list" class="space-y-4"></div>
+            </div>
+
+            <div class="bg-zinc-900 border border-[#00ff9f]/30 p-6 rounded">
+                <h2 class="flex justify-between text-lg mb-4">
+                    <span>📢 Announcements</span>
+                    <button onclick="addAnnouncement()" class="text-xs border border-[#00ff9f] px-3 py-1 rounded hover:bg-[#00ff9f]/10">+ ADD</button>
+                </h2>
+                <div id="announcements-list" class="space-y-4 text-sm"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function addNewTool() {
+            const name = prompt("Nom du Tool :", "Nova Token Grabber v2");
+            if (!name) return;
+            const dl = Math.floor(Math.random()*500)+100;
+            const html = `<div class="flex gap-3 items-center bg-black/50 p-3 rounded border border-[#00ff9f]/20"><div class="w-10 h-10 bg-gradient-to-br from-purple-600 to-cyan-500 rounded flex items-center justify-center text-xl">🔥</div><div class="flex-1"><div class="font-bold">${name}</div><div class="text-xs text-[#00ff9f]/60">${dl} downloads</div></div><button onclick="alert('Download Empire lancé !')" class="bg-[#00ff9f] text-black px-4 py-2 text-xs rounded font-bold">DOWNLOAD</button></div>`;
+            document.getElementById('tools-list').innerHTML += html;
+        }
+        function editStat(el) {
+            const val = prompt("Nouvelle valeur :", el.querySelector('div').innerText);
+            if (val !== null) el.querySelector('div').innerText = val;
+        }
+        function addAnnouncement() {
+            const text = prompt("Nouvelle annonce :", "Nouveau tool dispo !");
+            if (text) document.getElementById('announcements-list').innerHTML += `<div class="border-l-4 border-[#00ff9f] pl-3 py-1">${text}</div>`;
+        }
+        function joinDiscord() {
+            window.open("https://discord.gg/", "_blank");
+        }
+        window.onload = () => {
+            document.getElementById('tools-list').innerHTML = `<div class="flex gap-3 items-center bg-black/50 p-3 rounded border border-[#00ff9f]/20"><div class="w-10 h-10 bg-gradient-to-br from-red-600 to-orange-500 rounded flex items-center justify-center text-xl">☢️</div><div class="flex-1"><div class="font-bold">Nova Nuker Bot</div><div class="text-xs text-[#00ff9f]/60">420 downloads</div></div><button onclick="alert('Download lancé depuis L’Empire Nova 🔥')" class="bg-[#00ff9f] text-black px-4 py-2 text-xs rounded font-bold">DOWNLOAD</button></div>`;
+            document.getElementById('announcements-list').innerHTML = `<div class="border-l-4 border-[#00ff9f] pl-3 py-1">L’Empire Nova est officiellement en ligne !</div>`;
+        };
+    </script>
+</body>
+</html>
